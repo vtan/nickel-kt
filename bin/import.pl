@@ -19,7 +19,8 @@ while (<>) {
         my %object = (
             date => $date,
             amount => int $amount,
-            category => $category
+            category => $category,
+            description => $description
         );
         my $json = encode_json \%object;
         utf8::decode $json;
