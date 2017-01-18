@@ -2,21 +2,25 @@ var entryFormController = function($http, $window) {
   var ctrl = this;
   var expensesUri = 'api/expenses';
 
-  ctrl.input = {
-    date: new Date(),
-    amounts: '',
-    category: ''
-  };
+  ctrl.initInput = function() {
+    ctrl.input = {
+      date: new Date(),
+      amounts: '',
+      category: '',
+      description: ''
+    };
+  }
 
   ctrl.createExpense = function() {
     var newExpense = {
       date: ctrl.input.date,
       amount: ctrl.calcAmount(),
-      category: ctrl.input.category
+      category: ctrl.input.category,
+      description: ctrl.input.description
     };
     $http.post(expensesUri, newExpense).then(
       function success(response) {
-        ctrl.input = {};
+        ctrl.initInput();
       },
       function failure(response) {
         $window.alert('Status ' + response.status);
@@ -31,6 +35,8 @@ var entryFormController = function($http, $window) {
       .filter(function(x) { return !isNaN(x); })
       .reduce(function(x, y) { return x + y; }, 0);
   };
+
+  ctrl.initInput();
 };
 
 angular

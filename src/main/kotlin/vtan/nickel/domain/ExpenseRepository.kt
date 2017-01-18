@@ -6,7 +6,7 @@ import java.time.YearMonth
 
 interface ExpenseRepository {
 
-    fun createNew(date: LocalDate, amount: BigDecimal, category: Category): Expense
+    fun createNew(date: LocalDate, amount: BigDecimal, category: Category, description: String): Expense
 
     fun sumByYearMonthAndCategory(): List<SumByMonthAndCategory>
 

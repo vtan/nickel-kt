@@ -19,17 +19,18 @@ import javax.inject.Inject
 @Component
 class JdbcExpenseRepository @Inject constructor(val jdbcTemplate: JdbcTemplate) : ExpenseRepository {
 
-    override fun createNew(date: LocalDate, amount: BigDecimal, category: Category): Expense {
+    override fun createNew(date: LocalDate, amount: BigDecimal, category: Category, description: String): Expense {
         val keyHolder = GeneratedKeyHolder()
         jdbcTemplate.update(fun(conn): PreparedStatement {
             val stmt = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS)
             stmt.setDate(1, Date.valueOf(date))
             stmt.setBigDecimal(2, amount)
             stmt.setString(3, category.name)
+            stmt.setString(4, description)
             return stmt
         }, keyHolder)
 
-        return Expense(keyHolder.key.toLong(), date, amount, category)
+        return Expense(keyHolder.key.toLong(), date, amount, category, description)
     }
 
     override fun sumByYearMonthAndCategory(): List<SumByMonthAndCategory> {
@@ -43,7 +44,7 @@ class JdbcExpenseRepository @Inject constructor(val jdbcTemplate: JdbcTemplate) 
     }
 }
 
-private const val INSERT = "INSERT INTO expense (date, amount, category) VALUES (?, ?, ?)"
+private const val INSERT = "INSERT INTO expense (date, amount, category, description) VALUES (?, ?, ?, ?)"
 
 private const val SELECT_MONTH = """
 SELECT category, YEAR(date) year, MONTH(date) month, SUM(amount) sum

@@ -21,12 +21,12 @@ private val LOG = LoggerFactory.getLogger(ExpenseRestResource::class.java)
 @Produces(MediaType.APPLICATION_JSON)
 class ExpenseRestResource @Inject constructor(val expenseRepository: ExpenseRepository) {
 
-    data class PostExpense(val date: LocalDate, val amount: BigDecimal, val category: Category)
+    data class PostExpense(val date: LocalDate, val amount: BigDecimal, val category: Category, val description: String)
 
     @POST
     fun postExpense(postExpense: PostExpense, @Context uriInfo: UriInfo): Response {
         val newExpense = with(postExpense) {
-            expenseRepository.createNew(date, amount, category)
+            expenseRepository.createNew(date, amount, category, description)
         }
         LOG.debug("Created {}", newExpense)
         val location = uriInfo.absolutePathBuilder.path(newExpense.id.toString()).build()
