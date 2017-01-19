@@ -3,7 +3,7 @@ var expensesController = function($http, $window) {
   var expensesUri = 'api/expenses';
   var yearMonthsUri = expensesUri + '/yearmonths';
 
-  ctrl.yearMonthSelected = function() {
+  ctrl.selectYearMonth = function() {
     var params = {
       yearmonth: ctrl.selectedYearMonth
     };
@@ -17,11 +17,21 @@ var expensesController = function($http, $window) {
     );
   };
 
+  ctrl.deleteExpense = function(id) {
+    var expenseUri = expensesUri + '/' + id;
+    $http.delete(expenseUri).then(
+      function success() {
+        ctrl.expensesInSelectedYearMonth = ctrl.expensesInSelectedYearMonth
+          .filter(function(expense) { return expense.id != id; });
+      }
+    );
+  };
+
   $http.get(yearMonthsUri).then(
     function success(response) {
       ctrl.yearMonths = response.data;
       ctrl.selectedYearMonth = ctrl.yearMonths[ctrl.yearMonths.length - 1];
-      ctrl.yearMonthSelected();
+      ctrl.selectYearMonth();
     },
     function failure(response) {
       $window.alert('Status ' + response.status);

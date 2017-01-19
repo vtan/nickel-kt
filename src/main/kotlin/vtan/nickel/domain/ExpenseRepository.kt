@@ -14,4 +14,6 @@ interface ExpenseRepository {
 
     fun sumByYearMonthAndCategory(): List<SumByMonthAndCategory>
 
+    fun delete(id: Long): Boolean
+
 }

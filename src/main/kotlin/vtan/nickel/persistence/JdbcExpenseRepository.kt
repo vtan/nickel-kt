@@ -55,7 +55,6 @@ class JdbcExpenseRepository @Inject constructor(val jdbcTemplate: JdbcTemplate) 
             YearMonth.of(year, month)
         })
 
-
     override fun sumByYearMonthAndCategory(): List<SumByMonthAndCategory> = jdbcTemplate.query(
         SELECT_MONTHLY_SUMS,
         { resultSet, rowNum ->
@@ -65,9 +64,21 @@ class JdbcExpenseRepository @Inject constructor(val jdbcTemplate: JdbcTemplate) 
             val sum = resultSet.getBigDecimal("sum")
             SumByMonthAndCategory(YearMonth.of(year, month), category, sum)
         })
+
+    override fun delete(id: Long): Boolean {
+        val affectedRows = jdbcTemplate.update { conn ->
+            val stmt = conn.prepareStatement(DELETE)
+            stmt.setLong(1, id)
+            stmt
+        }
+        return affectedRows > 0
+    }
 }
 
-private const val INSERT = "INSERT INTO expense (date, amount, category, description) VALUES (?, ?, ?, ?)"
+private const val INSERT = """
+INSERT INTO expense (date, amount, category, description)
+VALUES (?, ?, ?, ?)
+"""
 
 private const val SELECT_BY_YEAR_MONTH = """
 SELECT id, date, amount, category, description
@@ -86,4 +97,9 @@ private const val SELECT_MONTHLY_SUMS = """
 SELECT category, YEAR(date) year, MONTH(date) month, SUM(amount) sum
 FROM expense
 GROUP BY category, YEAR(date), MONTH(date)
+"""
+
+private const val DELETE = """
+DELETE FROM expense
+WHERE id = ?
 """

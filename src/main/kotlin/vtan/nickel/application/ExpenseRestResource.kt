@@ -40,14 +40,25 @@ class ExpenseRestResource @Inject constructor(val expenseRepository: ExpenseRepo
 
     // TODO split into get sum amounts and get year-months
     @GET
-    fun getExpenses(@QueryParam("yearmonth") yearMonth: YearMonthParam?): Response = if (yearMonth == null) {
-        Response.ok(expenseRepository.sumByYearMonthAndCategory()).build()
-    } else {
-        Response.ok(expenseRepository.findAllByYearMonth(yearMonth.parsed)).build()
-    }
+    fun getExpenses(@QueryParam("yearmonth") yearMonth: YearMonthParam?): Response =
+        if (yearMonth == null) {
+            Response.ok(expenseRepository.sumByYearMonthAndCategory()).build()
+        } else {
+            Response.ok(expenseRepository.findAllByYearMonth(yearMonth.parsed)).build()
+        }
 
     @GET
     @Path("yearmonths")
     fun getYearMonthsOfExpenses(): Response = Response.ok(expenseRepository.findYearMonths()).build()
+
+    @DELETE
+    @Path("{id}")
+    fun deleteExpense(@PathParam("id") id: Long): Response =
+        if (expenseRepository.delete(id)) {
+            LOG.debug("Deleted {}", id)
+            Response.noContent().build()
+        } else {
+            Response.status(Response.Status.NOT_FOUND).build()
+        }
 
 }

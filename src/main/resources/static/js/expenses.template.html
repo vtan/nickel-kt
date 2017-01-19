@@ -3,7 +3,7 @@
 </div>
 
 <select ng-model="$ctrl.selectedYearMonth"
-        ng-change="$ctrl.yearMonthSelected()"
+        ng-change="$ctrl.selectYearMonth()"
         class="form-control">
   <option ng-repeat="yearMonth in $ctrl.yearMonths" value="{{yearMonth}}">{{yearMonth}}</option>
 </select>
@@ -14,11 +14,18 @@
     <th>Amount</th>
     <th>Category</th>
     <th>Description</th>
+    <th>Delete</th>
+    <th/>
   </tr>
   <tr ng-repeat="expense in $ctrl.expensesInSelectedYearMonth">
     <td>{{expense.date}}</td>
     <td>{{expense.amount}}</td>
     <td>{{expense.category}}</td>
     <td>{{expense.description}}</td>
+    <td>
+      <button ng-click="$ctrl.deleteExpense(expense.id)" type="button" class="btn btn-default btn-xs">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+    </td>
   </tr>
 </table>
