@@ -11,13 +11,11 @@
   </canvas>
 </div>
 
-<div ng-repeat="category in $ctrl.categories">
-  <div class="checkbox">
-    <label>
-      <input ng-model="$ctrl.categoryVisibilities[category]"
-             ng-change="$ctrl.applyCategoryVisibilities()"
-             type="checkbox" />
-      {{category}}
-    </label>
-  </div>
+<div ng-repeat="category in $ctrl.categories" class="checkbox">
+  <label>
+    <input ng-model="$ctrl.categoryVisibilities[category]"
+           ng-change="$ctrl.applyCategoryVisibilities()"
+           type="checkbox" />
+    {{category}}
+  </label>
 </div>

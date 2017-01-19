@@ -7,6 +7,9 @@ angular
       .when('/new', {
         template: '<entry-form></entry-form>'
       })
+      .when('/expenses', {
+        template: '<expenses></expenses>'
+      })
       .when('/chart', {
         template: '<chart></chart>'
       })

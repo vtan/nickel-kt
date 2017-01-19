@@ -7,6 +7,10 @@ var navbarController = function($location) {
       name: 'New'
     },
     {
+      path: '/expenses',
+      name: 'Expenses'
+    },
+    {
       path: '/chart',
       name: 'Chart'
     }

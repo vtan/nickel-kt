@@ -6,6 +6,7 @@ import vtan.nickel.domain.Category
 import vtan.nickel.domain.ExpenseRepository
 import java.math.BigDecimal
 import java.time.LocalDate
+import java.time.YearMonth
 import javax.inject.Inject
 import javax.ws.rs.*
 import javax.ws.rs.core.Context
@@ -23,6 +24,10 @@ class ExpenseRestResource @Inject constructor(val expenseRepository: ExpenseRepo
 
     data class PostExpense(val date: LocalDate, val amount: BigDecimal, val category: Category, val description: String)
 
+    class YearMonthParam(param: String) {
+        val parsed: YearMonth = YearMonth.parse(param)
+    }
+
     @POST
     fun postExpense(postExpense: PostExpense, @Context uriInfo: UriInfo): Response {
         val newExpense = with(postExpense) {
@@ -33,7 +38,16 @@ class ExpenseRestResource @Inject constructor(val expenseRepository: ExpenseRepo
         return Response.created(location).build()
     }
 
+    // TODO split into get sum amounts and get year-months
     @GET
-    fun getSumAmountsByYearMonthAndCategory(): Response = Response.ok(expenseRepository.sumByYearMonthAndCategory()).build()
+    fun getExpenses(@QueryParam("yearmonth") yearMonth: YearMonthParam?): Response = if (yearMonth == null) {
+        Response.ok(expenseRepository.sumByYearMonthAndCategory()).build()
+    } else {
+        Response.ok(expenseRepository.findAllByYearMonth(yearMonth.parsed)).build()
+    }
+
+    @GET
+    @Path("yearmonths")
+    fun getYearMonthsOfExpenses(): Response = Response.ok(expenseRepository.findYearMonths()).build()
 
 }
