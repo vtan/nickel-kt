@@ -1,4 +1,4 @@
-var entryFormController = function($http, $window) {
+var entryFormController = function(expenseResource) {
   var ctrl = this;
   var expensesUri = 'api/expenses';
 
@@ -18,14 +18,9 @@ var entryFormController = function($http, $window) {
       category: ctrl.input.category,
       description: ctrl.input.description
     };
-    $http.post(expensesUri, newExpense).then(
-      function success(response) {
-        ctrl.initInput();
-      },
-      function failure(response) {
-        $window.alert('Status ' + response.status);
-      }
-    );
+    expenseResource.create(newExpense, function(){
+      ctrl.initInput();
+    })
   };
 
   ctrl.calcAmount = function() {

@@ -1,4 +1,4 @@
-var chartController = function($http, $window) {
+var chartController = function(expenseResource) {
   var ctrl = this;
   var expensesUri = 'api/expenses';
 
@@ -13,18 +13,18 @@ var chartController = function($http, $window) {
     }
   };
 
-  ctrl.createChartFromExpenses = function(expenses) {
-    var months = expenses
+  ctrl.createChartFromExpenseSums = function(expenseSums) {
+    var months = expenseSums
       .map(function(entry) { return entry.month; })
       .filter(function(elem, index, self) { return index == self.indexOf(elem); })
       .sort();
-    var categories = expenses
+    var categories = expenseSums
       .map(function(entry) { return entry.category; })
       .filter(function(elem, index, self) { return index == self.indexOf(elem); });
     var dataByCategories = categories
       .reduce(function(result, category) {
         var monthlySums = months.map(function(month) {
-          var foundEntry = expenses
+          var foundEntry = expenseSums
             .find(function(entry) { return entry.category == category && entry.month == month; })
           return foundEntry ? foundEntry.sum : 0;
         });
@@ -68,14 +68,9 @@ var chartController = function($http, $window) {
       .filter(function(data, index) { return dataVisibilities[index]; });
   }
 
-  $http.get(expensesUri).then(
-    function success(response) {
-      ctrl.createChartFromExpenses(response.data);
-    },
-    function failure(response) {
-      $window.alert('Status ' + response.status);
-    }
-  );
+  expenseResource.getSumsByCategoryAndYearMonth(function(sums) {
+    ctrl.createChartFromExpenseSums(sums);
+  });
 };
 
 angular
