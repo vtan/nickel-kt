@@ -1,4 +1,4 @@
-var navbarController = function($location) {
+var navigationListController = function($location) {
   var ctrl = this;
 
   ctrl.pages = [
@@ -23,7 +23,7 @@ var navbarController = function($location) {
 
 angular
   .module('nickel')
-  .component('navbar', {
-    templateUrl: 'js/navbar.template.html',
-    controller: navbarController
+  .component('navigationList', {
+    templateUrl: 'js/navigation-list.template.html',
+    controller: navigationListController
   });

@@ -1,0 +1,3 @@
+<ul ng-repeat="page in $ctrl.pages" class="nav navbar-nav">
+  <li ng-class="{ active: $ctrl.isActive(page) }"><a href="#!{{page.path}}">{{page.name}}</a></li>
+</ul>

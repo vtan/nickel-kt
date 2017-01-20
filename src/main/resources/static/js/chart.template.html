@@ -1,21 +1,19 @@
 <div class="page-header">
-  <h1>Chart</h1>
+  <h1>Expense chart</h1>
 </div>
 
 <div>
   <canvas class="chart chart-line"
-    chart-data="$ctrl.chart.data"
-    chart-labels="$ctrl.chart.labels"
-    chart-series="$ctrl.chart.series"
-    chart-options="$ctrl.chart.options">
+          chart-data="$ctrl.chart.data"
+          chart-labels="$ctrl.chart.labels"
+          chart-series="$ctrl.chart.series"
+          chart-options="$ctrl.chart.options">
   </canvas>
 </div>
 
-<div ng-repeat="category in $ctrl.categories" class="checkbox">
-  <label>
-    <input ng-model="$ctrl.categoryVisibilities[category]"
-           ng-change="$ctrl.applyCategoryVisibilities()"
-           type="checkbox" />
-    {{category}}
-  </label>
-</div>
+<label ng-repeat="category in $ctrl.categories" class="checkbox-inline">
+  <input ng-model="$ctrl.categoryVisibilities[category]"
+         ng-change="$ctrl.applyCategoryVisibilities()"
+         type="checkbox"/>
+  {{category}}
+</label>

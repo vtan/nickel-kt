@@ -1,8 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="nickel">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <title>Nickel</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous"/>
+</head>
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Nickel</a>
+      </div>
+
+      <navigation-list></navigation-list>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div ng-view></div>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 
@@ -16,18 +35,6 @@
   <script src="js/chart.component.js"></script>
   <script src="js/entry-form.component.js"></script>
   <script src="js/expenses.component.js"></script>
-  <script src="js/navbar.component.js"></script>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous" />
-</head>
-
-<body>
-  <navbar></navbar>
-
-  <div class="container">
-    <div ng-view></div>
-  </div>
+  <script src="js/navigation-list.component.js"></script>
 </body>
 </html>

@@ -11,18 +11,18 @@
 <table class="table table-condensed table-hover">
   <tr>
     <th>Date</th>
-    <th>Amount</th>
     <th>Category</th>
     <th>Description</th>
-    <th>Delete</th>
+    <th class="text-right">Amount</th>
+    <th class="text-right">Delete</th>
     <th/>
   </tr>
   <tr ng-repeat="expense in $ctrl.expensesInSelectedYearMonth">
     <td>{{expense.date}}</td>
-    <td>{{expense.amount}}</td>
     <td>{{expense.category}}</td>
     <td>{{expense.description}}</td>
-    <td>
+    <td class="text-right">{{expense.amount}}</td>
+    <td class="text-right">
       <button ng-click="$ctrl.deleteExpense(expense.id)" type="button" class="btn btn-default btn-xs">
         <span class="glyphicon glyphicon-remove"></span>
       </button>
