@@ -88,15 +88,15 @@ ORDER BY date, category, description, id
 """
 
 private const val SELECT_YEAR_MONTHS = """
-SELECT DISTINCT YEAR(date) year, MONTH(date) month
+SELECT DISTINCT YEAR(date) "year", MONTH(date) "month"
 FROM expense
-ORDER BY year, month
+ORDER BY "year", "month"
 """
 
 private const val SELECT_MONTHLY_SUMS = """
-SELECT category, YEAR(date) year, MONTH(date) month, SUM(amount) sum
+SELECT category, YEAR(date) "year", MONTH(date) "month", SUM(amount) "sum"
 FROM expense
-GROUP BY category, YEAR(date), MONTH(date)
+GROUP BY category, "year", "month"
 """
 
 private const val DELETE = """
