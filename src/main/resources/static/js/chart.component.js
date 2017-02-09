@@ -1,6 +1,5 @@
 var chartController = function(expenseResource) {
   var ctrl = this;
-  var expensesUri = 'api/expenses';
 
   var chartOptions = {
     scales: {

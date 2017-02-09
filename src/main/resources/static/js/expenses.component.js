@@ -1,7 +1,5 @@
 var expensesController = function(expenseResource) {
   var ctrl = this;
-  var expensesUri = 'api/expenses';
-  var yearMonthsUri = expensesUri + '/yearmonths';
 
   ctrl.selectYearMonth = function() {
     expenseResource.getAllInYearMonth(ctrl.selectedYearMonth, function(expenses) {

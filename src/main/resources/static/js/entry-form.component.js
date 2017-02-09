@@ -1,6 +1,5 @@
 var entryFormController = function(expenseResource) {
   var ctrl = this;
-  var expensesUri = 'api/expenses';
 
   ctrl.initInput = function() {
     ctrl.input = {
