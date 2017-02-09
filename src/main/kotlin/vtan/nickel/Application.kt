@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.stereotype.Component
 import vtan.nickel.application.ExpenseRestResource
+import vtan.nickel.application.SummaryRestResource
 import javax.ws.rs.ApplicationPath
 
 @SpringBootApplication
@@ -17,7 +18,9 @@ fun main(args: Array<String>) = SpringApplication.run(Application::class.java, *
 class JerseyConfig : ResourceConfig() {
 
     init {
-        registerClasses(ExpenseRestResource::class.java)
+        registerClasses(
+            ExpenseRestResource::class.java,
+            SummaryRestResource::class.java)
     }
 
 }

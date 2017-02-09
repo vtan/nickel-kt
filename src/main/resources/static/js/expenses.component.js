@@ -2,9 +2,11 @@ var expensesController = function(expenseResource) {
   var ctrl = this;
 
   ctrl.selectYearMonth = function() {
-    expenseResource.getAllInYearMonth(ctrl.selectedYearMonth, function(expenses) {
-      ctrl.expensesInSelectedYearMonth = expenses;
-    });
+    if (ctrl.selectedYearMonth != null) {
+      expenseResource.getAllInYearMonth(ctrl.selectedYearMonth, function(expenses) {
+        ctrl.expensesInSelectedYearMonth = expenses;
+      });
+    }
   };
 
   ctrl.deleteExpense = function(id) {

@@ -1,6 +1,7 @@
 var expenseResourceFactory = function($http, $window) {
   var expensesUri = 'api/expenses';
   var yearMonthsUri = expensesUri + '/yearmonths';
+  var summaryUri = 'api/summary';
 
   var failure = function(response) {
     $window.alert('Status ' + response.status);
@@ -38,7 +39,7 @@ var expenseResourceFactory = function($http, $window) {
     },
 
     getSumsByCategoryAndYearMonth: function(callback) {
-      $http.get(expensesUri).then(
+      $http.get(summaryUri).then(
         function success(response) { callback(response.data); },
         failure
       )

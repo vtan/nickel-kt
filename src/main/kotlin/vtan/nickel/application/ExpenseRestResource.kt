@@ -38,18 +38,16 @@ class ExpenseRestResource @Inject constructor(val expenseRepository: ExpenseRepo
         return Response.created(location).build()
     }
 
-    // TODO split into get sum amounts and get year-months
     @GET
-    fun getExpenses(@QueryParam("yearmonth") yearMonth: YearMonthParam?): Response =
-        if (yearMonth == null) {
-            Response.ok(expenseRepository.sumByYearMonthAndCategory()).build()
-        } else {
-            Response.ok(expenseRepository.findAllByYearMonth(yearMonth.parsed)).build()
-        }
+    fun getExpenses(@QueryParam("yearmonth") yearMonth: YearMonthParam): Response = Response
+        .ok(expenseRepository.findAllByYearMonth(yearMonth.parsed))
+        .build()
 
     @GET
     @Path("yearmonths")
-    fun getYearMonthsOfExpenses(): Response = Response.ok(expenseRepository.findYearMonths()).build()
+    fun getYearMonthsOfExpenses(): Response = Response
+        .ok(expenseRepository.findYearMonths())
+        .build()
 
     @DELETE
     @Path("{id}")
