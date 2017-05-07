@@ -55,8 +55,18 @@ class JdbcExpenseRepository @Inject constructor(val jdbcTemplate: JdbcTemplate) 
             YearMonth.of(year, month)
         })
 
-    override fun sumByYearMonthAndCategory(): List<SumByMonthAndCategory> = jdbcTemplate.query(
+    override fun sumByYearMonth(): Map<YearMonth, BigDecimal> = jdbcTemplate.query(
         SELECT_MONTHLY_SUMS,
+        { resultSet, rowNum ->
+            val year = resultSet.getInt("year")
+            val month = resultSet.getInt("month")
+            val sum = resultSet.getBigDecimal("sum")
+            Pair(YearMonth.of(year, month), sum)
+        })
+        .toMap()
+
+    override fun sumByYearMonthAndCategory(): List<SumByMonthAndCategory> = jdbcTemplate.query(
+        SELECT_MONTHLY_CAT_SUMS,
         { resultSet, rowNum ->
             val category = Category(resultSet.getString("category"))
             val year = resultSet.getInt("year")
@@ -94,6 +104,12 @@ ORDER BY "year", "month"
 """
 
 private const val SELECT_MONTHLY_SUMS = """
+SELECT YEAR(date) "year", MONTH(date) "month", SUM(amount) "sum"
+FROM expense
+GROUP BY "year", "month"
+"""
+
+private const val SELECT_MONTHLY_CAT_SUMS = """
 SELECT category, YEAR(date) "year", MONTH(date) "month", SUM(amount) "sum"
 FROM expense
 GROUP BY category, "year", "month"

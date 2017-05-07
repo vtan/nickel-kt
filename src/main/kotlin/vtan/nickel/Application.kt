@@ -4,6 +4,7 @@ import org.glassfish.jersey.server.ResourceConfig
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.stereotype.Component
+import vtan.nickel.application.BalanceRestResource
 import vtan.nickel.application.ExpenseRestResource
 import vtan.nickel.application.IncomeRestResource
 import vtan.nickel.application.SummaryRestResource
@@ -22,6 +23,7 @@ class JerseyConfig : ResourceConfig() {
         registerClasses(
             ExpenseRestResource::class.java,
             IncomeRestResource::class.java,
+            BalanceRestResource::class.java,
             SummaryRestResource::class.java)
     }
 

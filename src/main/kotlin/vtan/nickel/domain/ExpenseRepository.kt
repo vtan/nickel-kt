@@ -12,6 +12,8 @@ interface ExpenseRepository {
 
     fun findYearMonths(): List<YearMonth>
 
+    fun sumByYearMonth(): Map<YearMonth, BigDecimal>
+
     fun sumByYearMonthAndCategory(): List<SumByMonthAndCategory>
 
     fun delete(id: Long): Boolean

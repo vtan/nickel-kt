@@ -13,6 +13,9 @@ angular
       .when('/incomes', {
         template: '<incomes></incomes>'
       })
+      .when('/balance', {
+        template: '<balance></balance>'
+      })
       .when('/chart', {
         template: '<chart></chart>'
       })

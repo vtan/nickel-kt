@@ -15,6 +15,10 @@ var navigationListController = function($location) {
       name: 'Incomes'
     },
     {
+      path: '/balance',
+      name: 'Balance'
+    },
+    {
       path: '/chart',
       name: 'Chart'
     }

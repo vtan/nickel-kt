@@ -1,0 +1,20 @@
+<div class="page-header">
+  <h1>Balance</h1>
+</div>
+
+<table class="table table-condensed table-hover">
+  <tr>
+    <th>Month</th>
+    <th class="text-right">Expense</th>
+    <th class="text-right">Income</th>
+    <th class="text-right">Balance</th>
+    <th class="text-right">Acc. balance</th>
+  </tr>
+  <tr ng-repeat="monthly in $ctrl.balance">
+    <td>{{monthly.month}}</td>
+    <td class="text-right">{{monthly.expense}}</td>
+    <td class="text-right">{{monthly.income}}</td>
+    <td class="text-right">{{monthly.balance}}</td>
+    <td class="text-right">{{monthly.accumBalance}}</td>
+  </tr>
+</table>

@@ -8,7 +8,15 @@ data class Income(
     var beginMonth: YearMonth,
     var endMonth: YearMonth?,
     var amount: BigDecimal,
-    var description: String)
+    var description: String) {
+
+    fun includes(month: YearMonth): Boolean {
+        val afterBegin = beginMonth <= month
+        val beforeEnd = if (endMonth == null) true else month <= endMonth
+        return afterBegin && beforeEnd
+    }
+
+}
 
 interface IncomeRepository {
     fun createNew(beginMonth: YearMonth, endMonth: YearMonth?, amount: BigDecimal, description: String): Income
