@@ -3,12 +3,16 @@ var navigationListController = function($location) {
 
   ctrl.pages = [
     {
-      path: '/new',
-      name: 'New'
+      path: '/new-expense',
+      name: 'New expense'
     },
     {
       path: '/expenses',
       name: 'Expenses'
+    },
+    {
+      path: '/incomes',
+      name: 'Incomes'
     },
     {
       path: '/chart',

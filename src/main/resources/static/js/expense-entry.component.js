@@ -1,4 +1,4 @@
-var entryFormController = function(expenseResource) {
+var expenseEntryController = function(expenseResource) {
   var ctrl = this;
 
   ctrl.initInput = function() {
@@ -35,7 +35,7 @@ var entryFormController = function(expenseResource) {
 
 angular
   .module('nickel')
-  .component('entryForm', {
-    templateUrl: 'js/entry-form.template.html',
-    controller: entryFormController
+  .component('expenseEntry', {
+    templateUrl: 'js/expense-entry.template.html',
+    controller: expenseEntryController
   });

@@ -1,0 +1,60 @@
+<div class="page-header">
+  <h1>Incomes</h1>
+</div>
+
+<table class="table table-condensed table-hover">
+  <tr>
+    <th>Start</th>
+    <th>End</th>
+    <th>Description</th>
+    <th class="text-right">Amount</th>
+    <th class="text-right">Delete</th>
+    <th/>
+  </tr>
+  <tr ng-repeat="income in $ctrl.incomes">
+    <td>{{income.beginMonth}}</td>
+    <td>{{income.endMonth}}</td>
+    <td>{{income.description}}</td>
+    <td class="text-right">{{income.amount}}</td>
+    <td class="text-right">
+      <button ng-click="$ctrl.deleteIncome(income.id)" type="button" class="btn btn-default btn-xs">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+    </td>
+  </tr>
+</table>
+
+<form ng-submit="$ctrl.createIncome()" class="form-horizontal">
+  <div class="form-group">
+    <label for="newIncomeBeginMonth" class="col-sm-2 control-label">Start month</label>
+    <div class="col-sm-10">
+      <input ng-model="$ctrl.input.beginMonth" id="newIncomeBeginMonth" type="text" class="form-control"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="newIncomeEndMonth" class="col-sm-2 control-label">End month</label>
+    <div class="col-sm-10">
+      <input ng-model="$ctrl.input.endMonth" id="newIncomeEndMonth" type="text" class="form-control"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="newIncomeAmount" class="col-sm-2 control-label">Amount</label>
+    <div class="col-sm-10">
+      <input ng-model="$ctrl.input.amount" id="newIncomeAmount" type="text" class="form-control"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="newIncomeDescription" class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-10">
+      <input ng-model="$ctrl.input.description" id="newIncomeDescription" type="text" class="form-control"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus"></span>
+        Save
+      </button>
+    </div>
+  </div>
+</form>

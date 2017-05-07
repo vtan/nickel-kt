@@ -24,10 +24,6 @@ class ExpenseRestResource @Inject constructor(val expenseRepository: ExpenseRepo
 
     data class PostExpense(val date: LocalDate, val amount: BigDecimal, val category: Category, val description: String)
 
-    class YearMonthParam(param: String) {
-        val parsed: YearMonth = YearMonth.parse(param)
-    }
-
     @POST
     fun postExpense(postExpense: PostExpense, @Context uriInfo: UriInfo): Response {
         val newExpense = with(postExpense) {

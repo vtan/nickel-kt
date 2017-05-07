@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.stereotype.Component
 import vtan.nickel.application.ExpenseRestResource
+import vtan.nickel.application.IncomeRestResource
 import vtan.nickel.application.SummaryRestResource
 import javax.ws.rs.ApplicationPath
 
@@ -20,6 +21,7 @@ class JerseyConfig : ResourceConfig() {
     init {
         registerClasses(
             ExpenseRestResource::class.java,
+            IncomeRestResource::class.java,
             SummaryRestResource::class.java)
     }
 

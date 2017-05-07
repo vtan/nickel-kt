@@ -4,14 +4,17 @@ angular
     $locationProvider.hashPrefix('!');
 
     $routeProvider
-      .when('/new', {
-        template: '<entry-form></entry-form>'
+      .when('/new-expense', {
+        template: '<expense-entry></expense-entry>'
       })
       .when('/expenses', {
         template: '<expenses></expenses>'
       })
+      .when('/incomes', {
+        template: '<incomes></incomes>'
+      })
       .when('/chart', {
         template: '<chart></chart>'
       })
-      .otherwise('/new');
+      .otherwise('/new-expense');
   });
